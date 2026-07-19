@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://hillcountryelectrictx.com/sitemap.xml
+
+Sitemap: https://txhillcountryelectric.com/sitemap.xml

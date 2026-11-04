@@ -38,10 +38,14 @@
         .blog-link { background: #f0f9ff; padding: 20px; border-radius: 6px; text-decoration: none; color: #1a3a52; transition: transform 0.2s, box-shadow 0.2s; }
         .blog-link:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
         .blog-link h4 { color: #f59e0b; margin-bottom: 8px; }
-        form { background: #f9fafb; padding: 30px; border-radius: 8px; max-width: 500px; margin: 20px auto; }
+        form { background: #f9fafb; padding: 30px; border-radius: 8px; max-width: 500px; margin: 20px auto; position: relative; }
         form input, form textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
         form button { background: #f59e0b; color: white; padding: 15px 30px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; width: 100%; }
         form button:hover { background: #d97706; }
+        form button:disabled { opacity: 0.7; cursor: wait; }
+        form .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+        form .hp-field input { width: 1px; height: 1px; padding: 0; margin: 0; border: 0; }
+        .form-status { text-align: center; margin-top: 12px; font-weight: 600; }
         footer { background: #1a3a52; color: white; text-align: center; padding: 30px 0; margin-top: 40px; }
         .sticky-call { position: sticky; top: 0; background: #f59e0b; color: white; padding: 15px; text-align: center; font-weight: bold; z-index: 100; }
         .sticky-call a { color: white; text-decoration: none; }
@@ -174,12 +178,19 @@
         <section id="contact">
             <h2>Get Your Free Electrical Estimate</h2>
             <p style="text-align: center; margin-bottom: 20px;">Fill out the form below and we'll contact you within 1 hour during business hours.</p>
-            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <input type="tel" name="phone" placeholder="Your Phone Number" required>
+            <form class="lead-form" id="lead-form">
+                <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
+                <input type="email" name="email" placeholder="Your Email" required autocomplete="email">
+                <input type="tel" name="phone" placeholder="Your Phone Number" required autocomplete="tel">
+                <input type="text" name="service" placeholder="Service needed (repair, panel, generator, EV charger)">
+                <input type="text" name="area" placeholder="City or area">
                 <textarea name="message" placeholder="Describe your electrical issue or project..." rows="5" required></textarea>
+                <div class="hp-field" aria-hidden="true">
+                    <label for="company_website">Company website</label>
+                    <input id="company_website" name="company_website" tabindex="-1" autocomplete="off">
+                </div>
                 <button type="submit">Request Free Estimate</button>
+                <p class="form-status" role="status" aria-live="polite"></p>
             </form>
         </section>
 
@@ -252,6 +263,6 @@
     setTimeout(function () { scan(); }, 5000);
   })();
   </script>
-  <script src="https://www.tradedeskpro.com/js/tdp-lead-attribution.js" defer></script>
+  <script src="/js/tdp-leads.js" defer></script>
 </body>
 </html>

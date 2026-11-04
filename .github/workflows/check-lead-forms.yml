@@ -1,0 +1,15 @@
+name: Check lead forms
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject placeholder forms and missing assets
+        run: python3 scripts/check_lead_forms.py
+      - name: Mock the lead submit path
+        run: node scripts/test-tdp-leads.mjs
